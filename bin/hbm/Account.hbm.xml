@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.qr.repository.entity.Account" table="ACCOUNT">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="EMAIL" />
+        </property>
+        <property name="city" type="java.lang.String">
+            <column name="CITY" />
+        </property>
+        <set name="contacts" table="CONTACT" cascade="delete,save-update" inverse="true" lazy="true" fetch="select" >
+            <key>
+                <column name="ACCOUNT_ID" not-null="true"/>
+            </key>
+            <one-to-many class="com.qr.repository.entity.Contact" />
+        </set>
+    </class>
+</hibernate-mapping>
